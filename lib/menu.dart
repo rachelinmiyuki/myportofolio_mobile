@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myportofolio_mobile/main.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -8,9 +9,19 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP F";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder),
-    ItemHomepage("Tambah Proyek", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
+    ItemHomepage(
+      "Lihat Proyek",
+      Icons.folder,
+      AppColors.oldCopper,
+      Colors.white,
+    ),
+    ItemHomepage(
+      "Tambah Proyek",
+      Icons.add_circle,
+      AppColors.butterYellow,
+      AppColors.oldCopper,
+    ),
+    ItemHomepage("Logout", Icons.logout, AppColors.nebula, AppColors.oldCopper),
   ];
 
   @override
@@ -21,69 +32,68 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       // Body halaman utama dengan padding di sekelilingnya.
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: nama),
-                InfoCard(title: 'Class', content: kelas),
-              ],
-            ),
-
-            const SizedBox(height: 16.0),
-
-            // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
-            Center(
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      'Selamat datang di MyPortfolio Mobile!',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-
-                  // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
-                  GridView.count(
-                    primary: true,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
-                    shrinkWrap: true,
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
-                    }).toList(),
-                  ),
+                  InfoCard(title: 'NPM', content: npm),
+                  InfoCard(title: 'Name', content: nama),
+                  InfoCard(title: 'Class', content: kelas),
                 ],
               ),
-            ),
-          ],
+
+              const SizedBox(height: 16.0),
+
+              // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
+              Center(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16.0),
+                      child: Text(
+                        'Selamat datang di MyPortfolio Mobile!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+
+                    // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
+                    GridView.count(
+                      primary: false,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 3,
+                      childAspectRatio: 2.5,
+                      // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
+                      shrinkWrap: true,
+                      children: items.map((ItemHomepage item) {
+                        return ItemCard(item);
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
 
 class InfoCard extends StatelessWidget {
   // Kartu informasi yang menampilkan judul (title) dan isi (content).
@@ -96,6 +106,7 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       // Memberikan efek bayangan kartu elevasi 2 unit.
+      color: AppColors.nebula,
       elevation: 2.0,
       child: Container(
         // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
@@ -106,10 +117,17 @@ class InfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.oldCopper,
+              ),
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              content,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: AppColors.oldCopper),
+            ),
           ],
         ),
       ),
@@ -120,8 +138,10 @@ class InfoCard extends StatelessWidget {
 class ItemHomepage {
   final String name;
   final IconData icon;
+  final Color color;
+  final Color textColor;
 
-  ItemHomepage(this.name, this.icon);
+  ItemHomepage(this.name, this.icon, this.color, this.textColor);
 }
 
 class ItemCard extends StatelessWidget {
@@ -133,7 +153,7 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       // Menggunakan warna sekunder dari skema tema aplikasi.
-      color: Theme.of(context).colorScheme.secondary,
+      color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         // Aksi ketika kartu ditekan oleh pengguna.
@@ -142,7 +162,10 @@ class ItemCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(
+                content: Text("Kamu telah menekan tombol ${item.name}!"),
+                backgroundColor: AppColors.oldCopper,
+              ),
             );
         },
         child: Container(
@@ -151,16 +174,12 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: item.textColor, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: item.textColor),
                 ),
               ],
             ),

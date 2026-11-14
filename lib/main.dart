@@ -5,6 +5,13 @@ void main() {
   runApp(const MyApp());
 }
 
+class AppColors {
+  static const Color oldCopper = Color(0xFF775537);
+  static const Color butterYellow = Color(0xFFFBE29D);
+  static const Color nebula = Color(0xFFC0DDDA);
+  static const Color seashell = Color(0xFFF1F1F1);
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -14,8 +21,15 @@ class MyApp extends StatelessWidget {
       title: 'MyPortfolio',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigo,
-          secondary: Colors.amber[700],
+          seedColor: AppColors.oldCopper,
+          primary: AppColors.oldCopper,
+          secondary: AppColors.butterYellow,
+          surface: AppColors.seashell,
+        ),
+        scaffoldBackgroundColor: AppColors.seashell,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.oldCopper,
+          foregroundColor: AppColors.seashell,
         ),
         useMaterial3: true,
       ),
