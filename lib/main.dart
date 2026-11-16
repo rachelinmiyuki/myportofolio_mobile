@@ -10,6 +10,7 @@ class AppColors {
   static const Color butterYellow = Color(0xFFFBE29D);
   static const Color nebula = Color(0xFFC0DDDA);
   static const Color seashell = Color(0xFFF1F1F1);
+  static const Color dustyPink = Color(0xFFE8B4B8);
 }
 
 class MyApp extends StatelessWidget {

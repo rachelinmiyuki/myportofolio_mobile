@@ -19,9 +19,10 @@ class MyHomePage extends StatelessWidget {
       "Tambah Proyek",
       Icons.add_circle,
       AppColors.butterYellow,
-      AppColors.oldCopper,
-    ),
-    ItemHomepage("Logout", Icons.logout, AppColors.nebula, AppColors.oldCopper),
+      AppColors.oldCopper,),
+    ItemHomepage("Lihat Pengalaman", Icons.work, AppColors.oldCopper, Colors.white),
+    ItemHomepage("Tambah Pengalaman", Icons.add_circle, AppColors.butterYellow, AppColors.oldCopper),  
+    ItemHomepage("Logout", Icons.logout, AppColors.dustyPink, Colors.white),
   ];
 
   @override
@@ -76,13 +77,25 @@ class MyHomePage extends StatelessWidget {
                       padding: const EdgeInsets.all(20),
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
-                      crossAxisCount: 3,
+                      crossAxisCount: 2,
                       childAspectRatio: 2.5,
                       // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                       shrinkWrap: true,
-                      children: items.map((ItemHomepage item) {
-                        return ItemCard(item);
-                      }).toList(),
+                      children: [
+                        // Baris Proyek
+                        ItemCard(items[0]),
+                        ItemCard(items[1]),
+
+                        // Baris Pengalaman
+                        ItemCard(items[2]),
+                        ItemCard(items[3]),
+
+                        // Logout di tengah
+                        Transform.translate(
+                          offset: Offset(MediaQuery.of(context).size.width / 4, 0),
+                          child: ItemCard(items[4]),
+                        ),
+                      ],
                     ),
                   ],
                 ),
