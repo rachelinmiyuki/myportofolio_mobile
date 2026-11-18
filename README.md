@@ -66,6 +66,8 @@ myportofolio_mobile/
 ### Tugas 7
 - Menyesuaikan warna dan tampilan aplikasi dengan color palette.
 - Menambahkan informasi profil mahasiswa.
+- Menambahkan menu Lihat Proyek dan Tambah Proyek.
+- Menambahkan menu Lihat Pengalaman dan Tambah Pengalaman.
 - Menyesuaikan layout agar tidak mengalami overflow.
 - Menambahkan interaksi SnackBar pada setiap ItemCard.
 - Memperbarui dokumentasi dan AI disclosure.

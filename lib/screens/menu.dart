@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/main.dart';
+import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/widgets/project_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -19,9 +22,20 @@ class MyHomePage extends StatelessWidget {
       "Tambah Proyek",
       Icons.add_circle,
       AppColors.butterYellow,
-      AppColors.oldCopper,),
-    ItemHomepage("Lihat Pengalaman", Icons.work, AppColors.oldCopper, Colors.white),
-    ItemHomepage("Tambah Pengalaman", Icons.add_circle, AppColors.butterYellow, AppColors.oldCopper),  
+      AppColors.oldCopper,
+    ),
+    ItemHomepage(
+      "Lihat Pengalaman",
+      Icons.work,
+      AppColors.oldCopper,
+      Colors.white,
+    ),
+    ItemHomepage(
+      "Tambah Pengalaman",
+      Icons.add_circle,
+      AppColors.butterYellow,
+      AppColors.oldCopper,
+    ),
     ItemHomepage("Logout", Icons.logout, AppColors.dustyPink, Colors.white),
   ];
 
@@ -37,6 +51,7 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       // Body halaman utama dengan padding di sekelilingnya.
       body: SingleChildScrollView(
         child: Padding(
@@ -78,7 +93,7 @@ class MyHomePage extends StatelessWidget {
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       crossAxisCount: 2,
-                      childAspectRatio: 2.5,
+                      childAspectRatio: 2.2,
                       // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                       shrinkWrap: true,
                       children: [
@@ -92,7 +107,10 @@ class MyHomePage extends StatelessWidget {
 
                         // Logout di tengah
                         Transform.translate(
-                          offset: Offset(MediaQuery.of(context).size.width / 4, 0),
+                          offset: Offset(
+                            MediaQuery.of(context).size.width / 4,
+                            0,
+                          ),
                           child: ItemCard(items[4]),
                         ),
                       ],
@@ -180,6 +198,13 @@ class ItemCard extends StatelessWidget {
                 backgroundColor: AppColors.oldCopper,
               ),
             );
+
+          if (item.name == "Tambah Proyek") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProjectFormPage()),
+            );
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -187,8 +212,8 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(item.icon, color: item.textColor, size: 30.0),
-                const Padding(padding: EdgeInsets.all(3)),
+                Icon(item.icon, color: item.textColor, size: 26.0),
+                const SizedBox(height: 2),
                 Text(
                   item.name,
                   textAlign: TextAlign.center,
