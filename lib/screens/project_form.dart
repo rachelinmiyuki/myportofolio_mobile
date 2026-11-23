@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/main.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+
 // TODO: Impor drawer yang sudah dibuat sebelumnya
 
 class ProjectFormPage extends StatefulWidget {
@@ -31,11 +32,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add Project Form',
-          ),
-        ),
+        title: const Center(child: Text('Add Project Form')),
         backgroundColor: AppColors.oldCopper,
         foregroundColor: Colors.white,
       ),
@@ -110,10 +107,12 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   ),
                   initialValue: _category,
                   items: _categories
-                      .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category),
-                          ))
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category),
+                        ),
+                      )
                       .toList(),
                   onChanged: (String? newValue) {
                     setState(() {
@@ -168,8 +167,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(AppColors.oldCopper),
+                      backgroundColor: WidgetStateProperty.all(
+                        AppColors.oldCopper,
+                      ),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -191,7 +191,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                                   ],
                                 ),
                               ),
-                              
+
                               actions: [
                                 TextButton(
                                   child: const Text('OK'),
@@ -213,7 +213,6 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
