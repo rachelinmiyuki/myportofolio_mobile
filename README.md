@@ -4,7 +4,7 @@ MyPortfolio Mobile merupakan aplikasi sederhana berbasis Flutter yang dibuat seb
 
 ## Features
 - Menampilkan informasi NPM, nama, dan kelas.
-- Menampilkan menu aksi Lihat Proyek, Tambah Proyek, Lihat Pengalaman, Tambah dan Logout.
+- Menampilkan menu aksi Lihat Proyek, Tambah Proyek, Lihat Pengalaman, Tambah Pengalaman, Tambah dan Logout.
 - Menampilkan SnackBar sebagai feedback ketika tombol ditekan.
 - Menggunakan warna berbeda untuk setiap tombol.
 - Menggunakan color palette Old Copper, Butter Yellow, Nebula, dan Seashell.
@@ -46,8 +46,13 @@ myportofolio_mobile/
 ├── ios/
 ├── web/
 ├── lib/
-│   ├── main.dart
-│   └── menu.dart
+│   ├── screens/
+│   │   ├── experience_form.dart
+│   │   ├── project_form.dart
+│   │   └── menu.dart
+│   ├── widgets/
+│   │   └── left_drawer.dart
+│   └── main.dart
 ├── test/
 ├── pubspec.yaml
 ├── pubspec.lock
@@ -126,3 +131,25 @@ Selama mengerjakan tugas ini, saya lebih sering menggunakan hot reload karena cu
 
 #### AI Disclosure
 Saya menggunakan ChatGPT saat mengalami kesulitan dalam memahami konsep Flutter atau mencari tahu penyebab error yang saya temui. ChatGPT juga saya gunakan untuk melihat beberapa alternatif cara penyelesaian, terutama dalam mengatur tampilan widget, mengatasi layout overflow, dan memahami penggunaan beberapa widget. Setelah itu, saya menyesuaikan dan menerapkan solusi tersebut pada project sesuai dengan kebutuhan saya.
+
+### Tugas 8
+#### 1. Jelaskan perbedaan antara `Navigator.push()`, `Navigator.pushReplacement()`, dan `Navigator.pop()`. Metode apa yang digunakan untuk membuka formulir dari kartu aksi? Jelaskan juga bagaimana opsi Home di drawer membawa pengguna kembali ke halaman utama.
+
+`Navigator.push()` digunakan untuk membuka halaman baru tanpa menghapus halaman sebelumnya dari navigation stack. `Navigator.pushReplacement()` digunakan untuk membuka halaman baru sekaligus menggantikan halaman yang sedang dibuka. Sementara itu, `Navigator.pop()` digunakan untuk menutup halaman saat ini dan kembali ke halaman sebelumnya.
+
+Pada project ini, saya menggunakan `Navigator.push()` untuk membuka halaman form Tambah Pengalaman dari kartu aksi maupun drawer. Untuk opsi Home di drawer, saya menggunakan `Navigator.pushReplacement()` agar halaman utama menggantikan halaman yang sedang dibuka.
+
+#### 2. Bagaimana susunan Scaffold, AppBar, dan Drawer membantu menjaga struktur halaman tetap konsisten? Berikan satu contoh penggunaan warna tema portofolio di lebih dari satu halaman.
+
+`Scaffold` digunakan sebagai struktur dasar halaman yang menampung komponen seperti `AppBar`, `Drawer`, dan body. Dengan menggunakan susunan yang sama, tampilan halaman utama dan halaman form menjadi lebih konsisten. Contohnya, saya menggunakan `AppColors.oldCopper` sebagai warna AppBar pada halaman utama maupun halaman Tambah Pengalaman, sehingga keduanya memiliki tampilan yang seragam.
+
+#### 3. Mengapa tata letak tersebut dipilih untuk formulir? Jelaskan peran widget pengatur jarak dan widget penggulir ketika ruang layar terbatas.
+
+Saya menggunakan `Column` untuk menyusun input secara vertikal agar formulir lebih mudah dibaca dan diisi. `Padding` dan `SizedBox` digunakan untuk memberikan jarak antarinput supaya tampilannya tidak terlalu rapat. Sementara itu, `SingleChildScrollView` memungkinkan pengguna menggulir halaman ketika seluruh input tidak muat dalam satu layar, termasuk saat keyboard sedang ditampilkan.
+
+#### 4. Apa peran GlobalKey<FormState>, validator, dan validate() saat tombol Simpan ditekan? Berikan satu contoh nilai yang ditolak oleh validasi dan jelaskan mengapa memilih jenis input atau papan ketik saja belum cukup.
+
+`GlobalKey<FormState>` digunakan untuk mengakses dan mengelola kondisi form. Setiap input memiliki `validator` untuk memeriksa apakah nilai yang dimasukkan sudah sesuai dengan ketentuan. Ketika tombol Simpan ditekan, `validate()` akan menjalankan seluruh validator pada form. Jika ada input yang tidak valid, proses penyimpanan tidak dilanjutkan dan pesan kesalahan ditampilkan pada kolom terkait. Contohnya, tanggal selesai akan ditolak jika tanggalnya sama dengan atau lebih awal daripada tanggal mulai. Penggunaan jenis input saja belum cukup karena pengguna masih bisa memasukkan nilai yang tidak sesuai dengan aturan, sehingga validasi tetap diperlukan.
+
+#### AI Disclosure - Tugas 8
+Saya menggunakan ChatGPT untuk membantu memahami instruksi tugas, menyusun struktur form pengalaman berdasarkan model Experience pada website portofolio, serta mencari alternatif implementasi navigasi, date picker, dan validasi input. Saya juga menggunakan ChatGPT untuk membantu memeriksa kemungkinan kesalahan pada kode. Setelah itu, saya menyesuaikan dan menerapkan kode pada project serta menguji alur navigasi dan validasi secara langsung.
